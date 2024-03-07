@@ -1,0 +1,32 @@
+<!-- index.html-->
+<!DOCTYPE html>
+<html lang = "eng">
+    <head>
+        <meta charset = "UTF-8">
+        <meta name = "viewport" content = "width = device-width, initial scale = 1.0">
+        <link rel = "stylesheet" href = "styles.css">
+        <title>Task Tracker</title>
+    </head>
+    <body>
+        <div class = "container">
+            <h1>Task Tracker</h1>
+            <form id = "taskForm">
+                <label for = "taskName">Task name: <label>
+                    <input type = "text" id = "taskName" name = "taskName">
+                </label>
+                <label for = "taskDescription">Task Description: <label>
+                    <input type = "text" id = "taskDescription" name = "taskDescription">
+                </label>
+                <label for = "taskDeadline">Task DeadlLine: <label>
+                    <input type = "text" id = "taskDeadline" name = "taskDeadline">
+                </label>
+
+                <button type = "submit">Add Task</button>
+            </form>
+            <table id = "taskTable">
+
+
+            </table>
+        </div>
+        <script src = "script.js"></script>
+    </body>
