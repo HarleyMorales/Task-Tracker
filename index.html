@@ -1,6 +1,6 @@
 <!-- index.html-->
 <!DOCTYPE html>
-<html lang = "eng">
+<html lang = "en">
     <head>
         <meta charset = "UTF-8">
         <meta name = "viewport" content = "width = device-width, initial scale = 1.0">
@@ -9,23 +9,17 @@
     </head>
     <body>
         <div class = "container">
-            <h1>Task Tracker</h1>
+            <h1 id = "taskTracker">Task Tracker</h1>
             <form id = "taskForm">
-                <label for = "taskName">Task name: <label>
+                <label for = "taskName">Task name: </label>
                     <input type = "text" id = "taskName" name = "taskName">
-                </label>
-                <label for = "taskDescription">Task Description: <label>
-                    <input type = "text" id = "taskDescription" name = "taskDescription">
-                </label>
-                <label for = "taskDeadline">Task DeadlLine: <label>
-                    <input type = "text" id = "taskDeadline" name = "taskDeadline">
-                </label>
-
+                <label for = "taskDescription">Task Description: </label>
+                    <textarea id = "taskDescription" name = "taskDescription" required></textarea>
+                <label for = "taskDeadline">Task Dead Line: </label>
+                    <input type = "date" id = "taskDeadline" name = "taskDeadline">
                 <button type = "submit">Add Task</button>
             </form>
             <table id = "taskTable">
-
-
             </table>
         </div>
         <script src = "script.js"></script>

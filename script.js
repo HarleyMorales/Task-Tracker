@@ -1,43 +1,57 @@
+let taskIdCounter = 0;
 let tasks = [];
-const tasksForm = document.getElementById("taskForm");
+const taskForm = document.getElementById("taskForm");
 const taskTable = document.getElementById("taskTable");
 
-// Function to handle form submissions
 function handleSubmission(event) {
     event.preventDefault();
-    // TODO: Get form input values
-    const taskName = document.getElementById('taskName').value
-    const taskDescription = document.getElementById('taskDescription').value
-    const taskDeadline = document.getElementById('taskDeadline').value
-    // TODO: Validate input fields
-    if(taskName.trim === "" || taskDeadline === ""){
+    const taskName = document.getElementById('taskName').value;
+    const taskDescription = document.getElementById('taskDescription').value;
+    const taskDeadline = document.getElementById('taskDeadline').value;
+
+    if(taskName.trim() === "" || taskDeadline === ""){
         alert('Task name and deadline are required!');
         return;
-    };
-    // TODO: Update the tasks array
-    tasks.push({name: taskName, description: taskDescription, deadline: taskDeadline});
+    }
+
+    // Add a unique ID to each task for easier management
+    tasks.push({
+        id: taskIdCounter++,
+        name: taskName,
+        description: taskDescription,
+        deadline: taskDeadline,
+        completed: false // Track whether the task is completed
+    });
     render();
 }
 
-// Function to render tasks in the table
 function render() {
-    // TODO: Use array methods to create a new table row of data for each item in the arr
-    taskTable.innerHTML = tasks.map(task => `
-    <tr>
-        <td>${task.name}</td>
-        <td>${task.description}</td>
-        <td>${task.deadline}</td>
-        <td><button onclick="markTaskComplete(this)">Complete</button></td>
-        <td><button onclick="removeTask(this)">Remove</button></td>
-    </tr>`
+    taskTable.innerHTML = `<tr><th>Task</th><th>Description</th><th>Deadline</th><th>Actions</th></tr>` + 
+        tasks.map(task => `
+        <tr data-task-id="${task.id}" class="${task.completed ? 'task-completed' : ''}">
+            <td>${task.name}</td>
+            <td>${task.description}</td>
+            <td>${task.deadline}</td>
+            <td>
+                <button onclick="markTaskComplete(${task.id})">Complete</button>
+                <button onclick="removeTask(${task.id})">Remove</button>
+            </td>
+        </tr>`
     ).join('');
 }
 
-// Function to initialize the table
-function init() {
-    taskTable.innerHTML = '';
-    tasks = [];
-    render(); 
+function markTaskComplete(taskId) {
+    const task = tasks.find(completion => completion.id === taskId);
+    if(task) {
+        task.completed = !task.completed; // 
+        render();
+    }
 }
 
-document.getElementById("taskForm").addEventListener('submit', handleSubmission);
+function removeTask(taskId) {
+    tasks = tasks.filter(task => task.id !== taskId);
+    render();
+}
+
+taskForm.addEventListener('submit', handleSubmission);
+render();
